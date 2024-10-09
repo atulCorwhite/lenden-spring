@@ -97,6 +97,10 @@ public class UserServiceImpl implements UserService {
             User existingUser = existingUserOptional.get();
             existingUser.setName(user.getName());
             existingUser.setEmail(user.getEmail());
+
+            if (user.getUserImage() != null && !user.getUserImage().isEmpty()) {
+                existingUser.setUserImage(user.getUserImage());
+            }
             // Add more fields to update as necessary
 
             return userRepository.save(existingUser);  // Save and return the updated user

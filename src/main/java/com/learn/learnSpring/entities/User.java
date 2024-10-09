@@ -22,6 +22,7 @@ public class User {
     private String email;
     private String mobileNumber;
     private String password;
+    private  String userImage;
 
     // Define the ManyToMany relationship with GroupModal
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

@@ -17,9 +17,9 @@ public class GroupController {
     // Create Group API with user email as a query parameter
     @PostMapping("/create-group")
     public ResponseEntity<?> createGroup(@RequestBody GroupRequest groupRequest,
-                                         @RequestParam String email) {
+                                         @RequestParam Long userId) {
         // Call the service to create the group with the GroupRequest DTO and userEmail
-        return groupService.createGroup(groupRequest, email);
+        return groupService.createGroup(groupRequest, userId);
     }
 
     @PostMapping("/add-group-members/{groupId}")
