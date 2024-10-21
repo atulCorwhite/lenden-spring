@@ -5,6 +5,7 @@ import com.learn.learnSpring.entities.UserLogin;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     List<User> getUserList();
@@ -18,4 +19,6 @@ public interface UserService {
     ResponseEntity<String> deleteUserById(long id);
 
     User updateUserById(long id, User user);
+
+    Optional<User> findByEmail(String email);
 }

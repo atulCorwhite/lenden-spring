@@ -13,8 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserLogin {
-    @Id
     String email;
     String mobileNumber;
     String password;
+    String token;
 }

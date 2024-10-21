@@ -18,4 +18,5 @@ public class UploadImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Change to Long for consistency
     private String imagePath; // Store the path of the uploaded image
+    private Long userId;
 }

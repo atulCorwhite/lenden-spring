@@ -6,7 +6,9 @@ import com.learn.learnSpring.service.UploadImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,10 +40,25 @@ public class UploadImageServiceImpl implements UploadImageService {
             UploadImage uploadImage = new UploadImage();
             uploadImage.setImagePath(filePath);
             uploadImageRepository.save(uploadImage); // Save the image path to the database
+
             return ResponseEntity.ok("Image uploaded successfully: " + filePath);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload image: " + e.getMessage());
 
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> downLoadImage(String filename) {
+        try {
+            Path path = Paths.get("/home/arathor/Dew/Iteli_j/spring_project/image-upload/" + filename);
+            byte[] data = Files.readAllBytes(path);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.setContentDispositionFormData("attachment", filename);
+            return ResponseEntity.ok().headers(headers).body(data);
+        } catch (IOException e) {
+            return ResponseEntity.status(404).body(null);
         }
     }
 
